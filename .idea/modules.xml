@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FestsaalService.iml" filepath="$PROJECT_DIR$/FestsaalService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/semanticSuperService.iml" filepath="$PROJECT_DIR$/semanticSuperService.iml" />
     </modules>
   </component>
 </project>

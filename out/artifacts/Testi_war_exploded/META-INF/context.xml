@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+  <Resource name="jdbc/servengdb"
+            auth="Container"
+            type="javax.sql.DataSource"
+            username="sql11232656"
+            password="gwSuThincw"
+            driverClassName="com.mysql.jdbc.Driver"
+            url="jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11232656"
+            maxIdle="1"/>
+</Context>
