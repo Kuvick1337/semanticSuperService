@@ -1,6 +1,6 @@
-package com.fesss.repository;
+package com.semantic.repository;
 
-import com.fesss.model.Saal;
+import com.semantic.model.Saal;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;

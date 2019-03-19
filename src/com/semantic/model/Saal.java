@@ -1,4 +1,4 @@
-package com.fesss.model;
+package com.semantic.model;
 
 /**
  * POJO-Modell fuer die Datenbank-Tabelle "Saal'

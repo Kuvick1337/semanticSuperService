@@ -1,12 +1,11 @@
-package com.fesss.repository;
+package com.semantic.repository;
 
-import com.fesss.model.Termin;
+import com.semantic.model.Termin;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 

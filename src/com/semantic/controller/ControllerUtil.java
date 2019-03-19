@@ -1,4 +1,4 @@
-package com.fesss.controller;
+package com.semantic.controller;
 
 public class ControllerUtil {
 

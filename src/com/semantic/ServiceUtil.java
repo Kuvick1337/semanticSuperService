@@ -1,4 +1,4 @@
-package com.fesss;
+package com.semantic;
 
 import java.sql.Timestamp;
 

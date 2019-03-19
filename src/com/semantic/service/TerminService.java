@@ -1,8 +1,8 @@
-package com.fesss.service;
+package com.semantic.service;
 
-import com.fesss.ServiceUtil;
-import com.fesss.model.Termin;
-import com.fesss.repository.TerminRepository;
+import com.semantic.ServiceUtil;
+import com.semantic.model.Termin;
+import com.semantic.repository.TerminRepository;
 
 import java.sql.Timestamp;
 

@@ -1,9 +1,9 @@
-<%@ page import="com.fesss.service.TerminService" %>
+<%@ page import="com.semantic.service.TerminService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page errorPage = "error_page.jsp" %>
 
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -21,7 +21,7 @@
 <body>
 <div class="header_area">
     <div class="jumbotron text-center">
-        <h1>Festsaal Super Service</h1>
+        <h1>semantic Super Service</h1>
     </div>
 
     <ul>

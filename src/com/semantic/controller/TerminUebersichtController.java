@@ -1,7 +1,7 @@
-package com.fesss.controller;
+package com.semantic.controller;
 
-import com.fesss.model.Termin;
-import com.fesss.repository.TerminRepository;
+import com.semantic.model.Termin;
+import com.semantic.repository.TerminRepository;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

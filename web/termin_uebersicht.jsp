@@ -1,5 +1,5 @@
-<%@ page import="com.fesss.model.Termin" %>
-<%@ page import="com.fesss.repository.TerminRepository" %>
+<%@ page import="com.semantic.model.Termin" %>
+<%@ page import="com.semantic.repository.TerminRepository" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page errorPage="error_page.jsp" %>
@@ -23,7 +23,7 @@
 <body>
 <div class="header_area">
     <div class="jumbotron text-center">
-        <h1>Festsaal Super Service</h1>
+        <h1>semantic Super Service</h1>
     </div>
 
     <ul>

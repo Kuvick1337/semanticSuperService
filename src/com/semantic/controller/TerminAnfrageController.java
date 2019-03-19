@@ -1,6 +1,6 @@
-package com.fesss.controller;
+package com.semantic.controller;
 
-import com.fesss.service.TerminService;
+import com.semantic.service.TerminService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
