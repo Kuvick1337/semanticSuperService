@@ -25,7 +25,7 @@
     </div>
 
     <ul>
-        <li><a href="index.jsp">Home</a></li>
+        <li><a href="New/home.jsp">Home</a></li>
         <li><a href="termin_uebersicht">Terminübersicht</a></li>
         <li><a href="termin_anfrage.jsp">Terminanfrage</a></li>
         <li><a href="termin_buchen.jsp">Termin buchen</a></li>
