@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page errorPage = "../error_page.jsp" %>
+<%@ page errorPage="../error_page.jsp" %>
 
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -15,21 +15,16 @@
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="../style.css" rel="stylesheet" type="text/css">
-
-    <title>Semantic </title>
+    <title>LVA</title>
 </head>
 <body>
-
-
 
 <div class="sidenav">
     <a href="home.jsp">Home</a>
     <a href="professor.jsp">Professor</a>
-    <a class = "active" href="lva.jsp">LVA</a>
+    <a class="active" href="lva.jsp">LVA</a>
     <a href="thema.jsp">Thema</a>
 </div>
-
-
 
 <div class="main">
 
