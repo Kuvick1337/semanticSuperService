@@ -27,7 +27,11 @@
 </div>
 
 <div class="main">
+    <%
+        String isFrei = (String) request.getAttribute("isfrei");
 
+        out.println("Der Saal ist verfügbar!!! \n" + isFrei);
+    %>
 </div>
 </body>
 </html>
