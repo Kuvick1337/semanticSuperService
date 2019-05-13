@@ -2,7 +2,7 @@
 <%@ page errorPage = "error_page.jsp" %>
 
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -16,31 +16,31 @@
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="style.css" rel="stylesheet" type="text/css">
 
-    <title>FESSS - Festsaal Super Service</title>
+    <title>Semantic </title>
 </head>
 <body>
-<div class="header_area">
-    <div class="jumbotron text-center">
-        <h1>Festsaal Super Service</h1>
-    </div>
 
-    <ul>
-        <li><a href="New/home.jsp">Home</a></li>
-        <li><a href="termin_uebersicht">Terminübersicht</a></li>
-        <li><a href="termin_anfrage.jsp">Terminanfrage</a></li>
-        <li><a href="termin_buchen.jsp">Termin buchen</a></li>
-        <li><a href="termin_loeschen.jsp">Termin löschen</a></li>
-    </ul>
+
+<div class="sidenav">
+    <a class="active" href="index.jsp">Home</a>
+    <a href="professor.jsp">Professor</a>
+    <a href="lva.jsp">LVA</a>
+    <a href="thema.jsp">Thema</a>
+    <a href="old/home.jsp">OLD Home</a>
 </div>
-<div class="container">
+
+
+<div class="main">
+    <div class="text-center">
+        <h1>Semantic Web Service</h1>
+    </div>
     <br>
-    <p>Guten Tag und herzlich willkommen beim Festsaal Service!</p>
+    <p>Herzlich Willkommen zu unserem Semantic Web Service!</p>
 
-    <p> Mit FESSS können Sie super einfach und schnell Termine für die Festsäle einsehen und buchen! </p>
+    <p>Unser Agent liefert eine Liste an Papers, welche thematisch
+        für eine LVA abgestimmt sind. Der Benutzer kann diese Liste
+        bezüglich Autoren und Thema filtern</p>
 
-    <p>Bitte wählen Sie einen der Menüpunkte, um zu den entsprechenden Funktionen zu gelangen!</p>
-
-    <p>Bei Fragen steht Ihnen das Team der Gruppe 2 gerne zur Verfügung!</p>
 </div>
 </body>
 </html>

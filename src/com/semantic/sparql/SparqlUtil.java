@@ -8,6 +8,6 @@ public class SparqlUtil {
     }
 
     public static String addUriToString(String filter) {
-        return URI_TEXT + filter;
+        return "<" + URI_TEXT + filter + ">";
     }
 }

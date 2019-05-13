@@ -8,6 +8,8 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="mysql:mysql-connector-java:5.1.40" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/Chrome Downloads/apache-jena-3.10.0/lib/jena-arq-3.10.0.jar" />
+          <element id="library" level="project" name="Apache Jena 3.10" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="semanticSuperService/web/Web" />

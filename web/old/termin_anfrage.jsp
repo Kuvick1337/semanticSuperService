@@ -1,7 +1,7 @@
 <%@ page import="com.semantic.model.Saal" %>
 <%@ page import="com.semantic.repository.SaalRepository" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page errorPage="error_page.jsp" %>
+<%@ page errorPage="../error_page.jsp" %>
 
 <!doctype html>
 <html lang="en">
@@ -16,7 +16,7 @@
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="../style.css" rel="stylesheet" type="text/css">
     <title>FESSS - Terminanfrage</title>
 </head>
 <body>
@@ -26,7 +26,7 @@
     </div>
 
     <ul>
-        <li><a href="index.jsp">Home</a></li>
+        <li><a href="../index.jsp">Home</a></li>
         <li><a href="termin_uebersicht.jsp">Terminübersicht</a></li>
         <li><a href="termin_anfrage.jsp">Terminanfrage</a></li>
         <li><a href="termin_buchen.jsp">Termin buchen</a></li>

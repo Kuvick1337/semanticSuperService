@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page errorPage="../error_page.jsp" %>
+<%@ page errorPage="error_page.jsp" %>
 
 <!doctype html>
 <html lang="en">
@@ -14,20 +14,24 @@
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="../style.css" rel="stylesheet" type="text/css">
-    <title>Thema</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <title>LVA</title>
 </head>
 <body>
 
 <div class="sidenav">
-    <a href="home.jsp">Home</a>
+    <a href="old/home.jsp">Home</a>
     <a href="professor.jsp">Professor</a>
-    <a href="lva.jsp">LVA</a>
-    <a class="active" href="thema.jsp">Thema</a>
+    <a class="active" href="lva.jsp">LVA</a>
+    <a href="thema.jsp">Thema</a>
 </div>
 
 <div class="main">
+    <%
+        String isFrei = (String) request.getAttribute("isfrei");
 
+        out.println("Der Saal ist verfügbar!!! \n" + isFrei);
+    %>
 </div>
 </body>
 </html>

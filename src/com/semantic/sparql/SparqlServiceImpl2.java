@@ -14,17 +14,40 @@ import java.util.stream.Collectors;
 public class SparqlServiceImpl2 implements SparqlService {
     @Override
     public List<ErgebnisDto> findLehrveranstaltungenByFilter(List<FilterDto> filters) {
-        return null;
+        LinkedList<ErgebnisDto> ergebnisDtos = new LinkedList<>();
+
+        ergebnisDtos.add(new ErgebnisDto("a", "b", "c"));
+        ergebnisDtos.add(new ErgebnisDto("e", "f", "g"));
+        ergebnisDtos.add(new ErgebnisDto("h", "i", "j"));
+
+        return ergebnisDtos;
     }
 
     @Override
     public List<ErgebnisDto> findProfessorenByFilter(List<FilterDto> filters) {
-        return null;
+        LinkedList<ErgebnisDto> ergebnisDtos = new LinkedList<>();
+        String queryString = "SELECT ?subject ?predicate ?object" +
+                "               WHERE {" +
+                "  ?subject <http://jku.at.dke/educate> ?object." +
+                " FILTER regex(str(?object), \"asic\", \"i\") }";
+
+        ergebnisDtos.add(new ErgebnisDto("a", "b", "c"));
+        ergebnisDtos.add(new ErgebnisDto("e", "f", "g"));
+        ergebnisDtos.add(new ErgebnisDto("h", "i", "j"));
+
+        return ergebnisDtos;
+//        return  null;
     }
 
     @Override
     public List<ErgebnisDto> findPapersByFilter(List<FilterDto> filters) {
-        return null;
+        LinkedList<ErgebnisDto> ergebnisDtos = new LinkedList<>();
+
+        ergebnisDtos.add(new ErgebnisDto("a", "b", "c"));
+        ergebnisDtos.add(new ErgebnisDto("e", "f", "g"));
+        ergebnisDtos.add(new ErgebnisDto("h", "i", "j"));
+
+        return ergebnisDtos;
     }
 
     @Override

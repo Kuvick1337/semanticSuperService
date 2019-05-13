@@ -3,7 +3,7 @@
 
 
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -26,10 +26,10 @@
 
     <ul>
         <li><a href="index.jsp">Home</a></li>
-        <li><a href="termin_uebersicht.jsp">Terminübersicht</a></li>
-        <li><a href="termin_anfrage.jsp">Terminanfrage</a></li>
-        <li><a href="termin_buchen.jsp">Termin buchen</a></li>
-        <li><a href="termin_loeschen.jsp">Termin löschen</a></li>
+        <li><a href="old/termin_uebersicht.jsp">Terminübersicht</a></li>
+        <li><a href="old/termin_anfrage.jsp">Terminanfrage</a></li>
+        <li><a href="old/termin_buchen.jsp">Termin buchen</a></li>
+        <li><a href="old/termin_loeschen.jsp">Termin löschen</a></li>
     </ul>
 </div>
 
