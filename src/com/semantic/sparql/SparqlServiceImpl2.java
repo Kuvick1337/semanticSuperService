@@ -14,40 +14,23 @@ import java.util.stream.Collectors;
 public class SparqlServiceImpl2 implements SparqlService {
     @Override
     public List<ErgebnisDto> findLehrveranstaltungenByFilter(List<FilterDto> filters) {
-        LinkedList<ErgebnisDto> ergebnisDtos = new LinkedList<>();
+        String queryString = new SparqlQueryBuilder.Builder().withFilter(filters).build();
 
-        ergebnisDtos.add(new ErgebnisDto("a", "b", "c"));
-        ergebnisDtos.add(new ErgebnisDto("e", "f", "g"));
-        ergebnisDtos.add(new ErgebnisDto("h", "i", "j"));
-
-        return ergebnisDtos;
+        return performQeryAndExtractResultSet(queryString);
     }
 
     @Override
     public List<ErgebnisDto> findProfessorenByFilter(List<FilterDto> filters) {
-        LinkedList<ErgebnisDto> ergebnisDtos = new LinkedList<>();
-        String queryString = "SELECT ?subject ?predicate ?object" +
-                "               WHERE {" +
-                "  ?subject <http://jku.at.dke/educate> ?object." +
-                " FILTER regex(str(?object), \"asic\", \"i\") }";
+        String queryString = new SparqlQueryBuilder.Builder().withFilter(filters).build();
 
-        ergebnisDtos.add(new ErgebnisDto("a", "b", "c"));
-        ergebnisDtos.add(new ErgebnisDto("e", "f", "g"));
-        ergebnisDtos.add(new ErgebnisDto("h", "i", "j"));
-
-        return ergebnisDtos;
-//        return  null;
+        return performQeryAndExtractResultSet(queryString);
     }
 
     @Override
     public List<ErgebnisDto> findPapersByFilter(List<FilterDto> filters) {
-        LinkedList<ErgebnisDto> ergebnisDtos = new LinkedList<>();
+        String queryString = new SparqlQueryBuilder.Builder().withFilter(filters).build();
 
-        ergebnisDtos.add(new ErgebnisDto("a", "b", "c"));
-        ergebnisDtos.add(new ErgebnisDto("e", "f", "g"));
-        ergebnisDtos.add(new ErgebnisDto("h", "i", "j"));
-
-        return ergebnisDtos;
+        return performQeryAndExtractResultSet(queryString);
     }
 
     @Override
@@ -104,5 +87,27 @@ public class SparqlServiceImpl2 implements SparqlService {
         }
 
         return filters.stream().distinct().collect(Collectors.toList());
+    }
+
+    private List<ErgebnisDto> performQeryAndExtractResultSet(String queryString) {
+        LinkedList<ErgebnisDto> searchResults = new LinkedList<>();
+        String subject, predicate, object;
+
+        for (String server : ServerList.getServers()) {
+            QueryExecution queryExecution = QueryExecutionFactory.sparqlService(server, queryString);
+            ResultSet resultSet = queryExecution.execSelect();
+
+            while (resultSet.hasNext()) {
+                QuerySolution qs = resultSet.next();
+
+                subject = SparqlUtil.extractInfoFromNode(qs.get("subject"));
+                predicate = SparqlUtil.extractInfoFromNode(qs.get("predicate"));
+                object = SparqlUtil.extractInfoFromNode(qs.get("object"));
+
+                searchResults.add(new ErgebnisDto(subject, predicate, object));
+            }
+        }
+
+        return searchResults.stream().distinct().collect(Collectors.toList());
     }
 }

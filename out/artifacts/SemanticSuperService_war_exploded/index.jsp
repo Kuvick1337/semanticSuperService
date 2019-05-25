@@ -2,7 +2,7 @@
 <%@ page errorPage = "error_page.jsp" %>
 
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -21,15 +21,13 @@
 <body>
 
 
-
 <div class="sidenav">
-    <a class = "active" href="index.jsp">Home</a>
+    <a class="active" href="index.jsp">Home</a>
     <a href="professor.jsp">Professor</a>
     <a href="lva.jsp">LVA</a>
     <a href="thema.jsp">Thema</a>
     <a href="old/home.jsp">OLD Home</a>
 </div>
-
 
 
 <div class="main">

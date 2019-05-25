@@ -108,9 +108,9 @@
 
                         out.println("<tr>");
                         out.println("<th scope=\"row\">" + (int) (idx + 1) + "</th>");
-                        out.println("<td>" + dto.getObject() + "</td>");
-                        out.println("<td>" + dto.getPredicate() + "</td>");
                         out.println("<td>" + dto.getSubject() + "</td>");
+                        out.println("<td>" + dto.getPredicate() + "</td>");
+                        out.println("<td>" + dto.getObject() + "</td>");
                         out.println("</tr>");
                     }
                 }
