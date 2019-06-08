@@ -30,6 +30,7 @@
     <a href="professor.jsp">Professor</a>
     <a class="active" href="lva.jsp">LVA</a>
     <a href="thema.jsp">Thema</a>
+    <a href="servers.jsp">Server-Liste</a>
 </div>
 
 <div class="main">
@@ -63,7 +64,7 @@
 
     <%
         Enumeration en = request.getParameterNames();
-        List<FilterDto> filterDtoList = new LinkedList<FilterDto>();
+        List<FilterDto> filterDtoList = new LinkedList<>();
 
         String parameterName;
         String parameterValue;

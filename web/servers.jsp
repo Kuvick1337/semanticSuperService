@@ -1,5 +1,5 @@
+<%@ page import="com.semantic.sparql.ServerList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page errorPage = "error_page.jsp" %>
 
 <!doctype html>
 <html lang="en">
@@ -15,32 +15,36 @@
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="style.css" rel="stylesheet" type="text/css">
-
-    <title>Semantic Super Service</title>
+    <title>Serverliste</title>
 </head>
 <body>
 
-
 <div class="sidenav">
-    <a class="active" href="index.jsp">Home</a>
+    <a href="index.jsp">Home</a>
     <a href="professor.jsp">Professor</a>
     <a href="lva.jsp">LVA</a>
     <a href="thema.jsp">Thema</a>
-    <a href="servers.jsp">Server-Liste</a>
+    <a class="active" href="servers.jsp">Server-Liste</a>
 </div>
-
 
 <div class="main">
     <div class="text-center">
-        <h1>Semantic Web Service</h1>
+        <h1 class="margin">Serverliste</h1> <br>
     </div>
-    <br>
-    <p>Herzlich Willkommen zu unserem Semantic Web Service!</p>
 
-    <p>Unser Agent liefert eine Liste an Papers, welche thematisch
-        für eine LVA abgestimmt sind. Der Benutzer kann diese Liste
-        bezüglich Autoren und Thema filtern</p>
+    <p>Derzeit werden folgende Server abgefragt:</p>
+
+    <ul class="list-group list-group-flush">
+        <%
+            for (String s : ServerList.getServers()) {
+                out.println("<li class=\"list-group-item\">" + s + "</li>");
+            }
+        %>
+    </ul>
+
+    <br>
 
 </div>
 </body>
 </html>
+
