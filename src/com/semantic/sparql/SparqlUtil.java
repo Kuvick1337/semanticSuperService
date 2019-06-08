@@ -5,10 +5,26 @@ import org.apache.jena.rdf.model.Resource;
 
 public class SparqlUtil {
     private static final String URI_TEXT = "http://jku.at.dke/";
+    private static final String STUDY_DIRECTION = "StudyDirection/";
+    private static final String TOPIC = "Topic/";
+    private static final String LVA = "LVA/";
+    private static final String PAPER = "Paper/";
+    private static final String PROFESSOR = "Prof/";
 
+    /**
+     * Strips away all unneccessary URI components contained in the data
+     *
+     * @param predicate the predicate to be stripped
+     * @return naked predixcate
+     */
     static String stripURI(String predicate) {
-        // TODO maybe also strip /StudyDirection and /Topic
-        return predicate.replace(URI_TEXT, "");
+        String s = predicate.replace(URI_TEXT, "");
+        s = s.replace(STUDY_DIRECTION, "");
+        s = s.replace(TOPIC, "");
+        s = s.replace(LVA, "");
+        s = s.replace(PAPER, "");
+        s = s.replace(PROFESSOR, "");
+        return s;
     }
 
     /**
@@ -26,21 +42,21 @@ public class SparqlUtil {
      * Some domains reside in a certain sub domain, eg. /Topics or /StudyDirection
      *
      * @param dto
-     * @return
+     * @return search subject with URI if needed
      */
     static String addUriToSearchSubject(FilterDto dto) {
         String filterWithUri;
 
         if ("educate".equalsIgnoreCase(dto.getSearchPredicate()) || "isAbout".equalsIgnoreCase(dto.getSearchPredicate())) {
-            filterWithUri = "<" + URI_TEXT + "StudyDirection/" + dto.getSearchValue() + ">";
+            filterWithUri = "<" + URI_TEXT + STUDY_DIRECTION + dto.getSearchValue() + ">";
         } else if ("hasJournal".equalsIgnoreCase(dto.getSearchPredicate()) || "hasTopic".equalsIgnoreCase(dto.getSearchPredicate())) {
-            filterWithUri = "<" + URI_TEXT + "Topic/" + dto.getSearchValue() + ">";
+            filterWithUri = "<" + URI_TEXT + TOPIC + dto.getSearchValue() + ">";
         } else if ("hasLVA".equalsIgnoreCase(dto.getSearchPredicate())) {
-            filterWithUri = "<" + URI_TEXT + "LVA/" + dto.getSearchValue() + ">";
+            filterWithUri = "<" + URI_TEXT + LVA + dto.getSearchValue() + ">";
         } else if ("write".equalsIgnoreCase(dto.getSearchPredicate())) {
-            filterWithUri = "<" + URI_TEXT + "Paper/" + dto.getSearchValue() + ">";
+            filterWithUri = "<" + URI_TEXT + PAPER + dto.getSearchValue() + ">";
         } else {
-            filterWithUri = "<" + URI_TEXT + dto.getSearchPredicate() + ">";
+            filterWithUri = "\"" + dto.getSearchValue() + "\"";
         }
 
         return filterWithUri;

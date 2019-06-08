@@ -16,7 +16,7 @@
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="style.css" rel="stylesheet" type="text/css">
 
-    <title>Semantic </title>
+    <title>Semantic Super Service</title>
 </head>
 <body>
 
@@ -26,7 +26,6 @@
     <a href="professor.jsp">Professor</a>
     <a href="lva.jsp">LVA</a>
     <a href="thema.jsp">Thema</a>
-    <a href="old/home.jsp">OLD Home</a>
 </div>
 
 

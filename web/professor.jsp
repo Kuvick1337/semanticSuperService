@@ -22,20 +22,21 @@
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="style.css" rel="stylesheet" type="text/css">
-    <title>Professor </title>
+    <title>Prof.-Suche </title>
 </head>
 <body>
 
 <div class="sidenav">
-    <a href="old/home.jsp">Home</a>
+    <a href="index.jsp">Home</a>
     <a class="active" href="professor.jsp">Professor</a>
     <a href="lva.jsp">LVA</a>
     <a href="thema.jsp">Thema</a>
 </div>
 
 <div class="main">
-
-    <h1 class="margin">Professor</h1> <br>
+    <div class="text-center">
+        <h1 class="margin">Suchseite für Professoren</h1> <br>
+    </div>
 
     <form action="/professor" method="post">
         <%
@@ -59,9 +60,40 @@
         </div>
     </form>
 
-
     <br>
 
+    <%
+        Enumeration en = request.getParameterNames();
+        List<FilterDto> filterDtoList = new LinkedList<FilterDto>();
+
+        String parameterName;
+        String parameterValue;
+
+        // enumerate through the keys and extract the values from the keys!
+        while (en.hasMoreElements()) {
+            parameterName = (String) en.nextElement();
+            parameterValue = request.getParameter(parameterName);
+            System.out.println(parameterName + ":" + parameterValue);
+
+            // only add filters with actual input to search list
+            if (parameterValue != null && !parameterValue.isEmpty()) {
+                filterDtoList.add(new FilterDto(parameterName, parameterValue));
+            }
+        }
+
+        //  if there are search filter present, then perform a search
+        if (filterDtoList.size() > 0) {
+
+            // pass filters to Sparql-Service to retrieve results
+            List<ErgebnisDto> ergebnisDtoList = sparqlService.findProfessorenByFilter(filterDtoList);
+
+            // if there are no search results, display a message
+            if (filterDtoList.size() > 0 && ergebnisDtoList == null || ergebnisDtoList.size() == 0) {
+                out.println("<div class=\"alert alert-warning\">\n" +
+                        "Es wurden leider keine Treffer zu Ihrer Suche gefunden!\n" +
+                        "</div>");
+            } else {
+    %>
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -72,36 +104,7 @@
         </tr>
         </thead>
         <tbody>
-        <%
-            Enumeration en = request.getParameterNames();
-            List<FilterDto> filterDtoList = new LinkedList<FilterDto>();
-
-            String parameterName;
-            String parameterValue;
-
-            // enumerate through the keys and extract the values from the keys!
-            while (en.hasMoreElements()) {
-                parameterName = (String) en.nextElement();
-                parameterValue = request.getParameter(parameterName);
-                System.out.println(parameterName + ":" + parameterValue);
-
-                // only add filters with actual input to search list
-                if (parameterValue != null && !parameterValue.isEmpty()) {
-                    filterDtoList.add(new FilterDto(parameterName, parameterValue));
-                }
-            }
-
-//            if there are search filter present, then perform a search
-            if (filterDtoList.size() > 0) {
-                // pass filters to Sparql-Service to retrieve results
-                List<ErgebnisDto> ergebnisDtoList = sparqlService.findProfessorenByFilter(filterDtoList);
-
-                // if there are no search results, display a message
-                if (filterDtoList.size() > 0 && ergebnisDtoList == null || ergebnisDtoList.size() == 0) {
-                    out.println("<div class=\"alert alert-warning\">\n" +
-                            "Es wurden leider keine Treffer zu Ihrer Suche gefunden!\n" +
-                            "</div>");
-                } else {
+            <%
                     // print result table if results are there
                     for (int idx = 0; idx < ergebnisDtoList.size(); idx++) {
                         ErgebnisDto dto = ergebnisDtoList.get(idx);
@@ -113,30 +116,11 @@
                         out.println("<td>" + dto.getObject() + "</td>");
                         out.println("</tr>");
                     }
-                }
-            }
+                    out.println("</tbody>");
+                    %>
+            <% }
+        }
         %>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-        </tr>
-        </tbody>
-    </table>
-
 </div>
 </body>
 </html>
