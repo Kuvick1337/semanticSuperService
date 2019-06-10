@@ -26,6 +26,7 @@
     <a href="professor.jsp">Professor</a>
     <a href="lva.jsp">LVA</a>
     <a href="thema.jsp">Thema</a>
+    <a href="servers.jsp">Server-Liste</a>
 </div>
 
 

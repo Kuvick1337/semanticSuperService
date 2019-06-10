@@ -73,7 +73,7 @@ public class SparqlServiceImpl2 implements SparqlService {
         String strippedPredicate;
         LinkedList<String> filters = new LinkedList<>();
 
-        for (String server : ServerList.getServers()) {
+        for (String server : ServerList.getInstance().getServers()) {
             QueryExecution queryExecution = QueryExecutionFactory.sparqlService(server, queryString);
             ResultSet resultSet = queryExecution.execSelect();
 
@@ -93,7 +93,7 @@ public class SparqlServiceImpl2 implements SparqlService {
         LinkedList<ErgebnisDto> searchResults = new LinkedList<>();
         String subject, predicate, object;
 
-        for (String server : ServerList.getServers()) {
+        for (String server : ServerList.getInstance().getServers()) {
             QueryExecution queryExecution = QueryExecutionFactory.sparqlService(server, queryString);
             ResultSet resultSet = queryExecution.execSelect();
 

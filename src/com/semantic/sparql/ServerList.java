@@ -6,16 +6,41 @@ public class ServerList {
 
     private static LinkedList<String> servers;
 
-    private static void setup() {
+    private static ServerList instance;
+
+    private ServerList() {
         servers = new LinkedList<>();
         servers.add("http://localhost:3030//Onto/sparql");
-//        TODO add RDF4J Server
     }
 
-    public static LinkedList<String> getServers() {
-        if (servers == null || servers.size() == 0) {
-            setup();
+    public static ServerList getInstance() {
+        if (ServerList.instance == null) {
+            ServerList.instance = new ServerList();
         }
+        return ServerList.instance;
+    }
+
+    public LinkedList<String> getServers() {
         return servers;
+    }
+
+    public boolean add(String newServer) {
+        int index = servers.indexOf(newServer);
+
+        if (index >= 0) {
+            return false;
+        }
+        servers.addLast(newServer);
+        return true;
+    }
+
+    public boolean remove(String rem) {
+        int index = servers.indexOf(rem);
+
+        if (index >= 0) {
+            servers.remove(index);
+            return true;
+        }
+        return false;
     }
 }
