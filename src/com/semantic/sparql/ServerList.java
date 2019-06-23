@@ -10,7 +10,7 @@ public class ServerList {
 
     private ServerList() {
         servers = new LinkedList<>();
-        servers.add("http://localhost:3030//Onto/sparql");
+        servers.add("http://localhost:3030//ds/query");
     }
 
     public static ServerList getInstance() {

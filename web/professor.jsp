@@ -1,7 +1,7 @@
 <%@ page import="com.semantic.sparql.ErgebnisDto" %>
 <%@ page import="com.semantic.sparql.FilterDto" %>
 <%@ page import="com.semantic.sparql.SparqlService" %>
-<%@ page import="com.semantic.sparql.SparqlServiceImpl2" %>
+<%@ page import="com.semantic.sparql.SparqlServiceImpl" %>
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="java.util.List" %>
@@ -41,7 +41,7 @@
 
     <form action="/professor" method="post">
         <%
-            SparqlService sparqlService = new SparqlServiceImpl2();
+            SparqlService sparqlService = new SparqlServiceImpl();
             List<String> professorFilter = sparqlService.getSuchfilterForProfessoren();
 
             System.out.println("found filters: " + professorFilter);

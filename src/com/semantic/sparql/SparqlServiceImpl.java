@@ -1,70 +1,116 @@
 package com.semantic.sparql;
 
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
+
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SparqlServiceImpl implements SparqlService {
-
     @Override
     public List<ErgebnisDto> findLehrveranstaltungenByFilter(List<FilterDto> filters) {
-        List<ErgebnisDto> list = new LinkedList<>();
-        list.add(new ErgebnisDto("DKE VO", "hatECTS", "6"));
-        list.add(new ErgebnisDto("DKE UE", "hatECTS", "6"));
-        list.add(new ErgebnisDto("Datenmodellierung VO", "hatTyp", "LVA"));
-        list.add(new ErgebnisDto("Datenmodellierung UE", "hatTyp", "Übung"));
+        String queryString = new SparqlQueryBuilder.Builder().withFilter(filters).build();
 
-        return list;
+        return performQeryAndExtractResultSet(queryString);
     }
 
     @Override
     public List<ErgebnisDto> findProfessorenByFilter(List<FilterDto> filters) {
-        List<ErgebnisDto> list = new LinkedList<>();
-        list.add(new ErgebnisDto("Schrefl", "hatTitel", "Dr."));
-        list.add(new ErgebnisDto("Queleshi", "hatTitel", "Dr."));
-        list.add(new ErgebnisDto("Kovacic", "hatTitel", "MSc."));
-        list.add(new ErgebnisDto("Schrefl", "gehoertZu", "JKU DKE Institut"));
+        String queryString = new SparqlQueryBuilder.Builder().withFilter(filters).build();
 
-        return list;
+        return performQeryAndExtractResultSet(queryString);
     }
 
     @Override
     public List<ErgebnisDto> findPapersByFilter(List<FilterDto> filters) {
-        List<ErgebnisDto> list = new LinkedList<>();
-        list.add(new ErgebnisDto("Einführung DKE", "isUsedFor", "DKE"));
-        list.add(new ErgebnisDto("Queleshi", "hatTitel", "Dr."));
-        list.add(new ErgebnisDto("Kovacic", "hatTitel", "MSc."));
-        list.add(new ErgebnisDto("Schrefl", "gehoertZu", "JKU DKE Institut"));
+        String queryString = new SparqlQueryBuilder.Builder().withFilter(filters).build();
 
-        return list;
+        return performQeryAndExtractResultSet(queryString);
     }
 
     @Override
     public List<String> getSuchfilterForLehrveranstaltungen() {
-        List<String> list = new LinkedList<>();
-        list.add("hasECTS");
-        list.add("hasPaper");
-        list.add("isLvaType");
+        String queryString = "SELECT DISTINCT ?predicate " +
+                "WHERE { ?subject ?predicate ?object." +
+                " FILTER regex(str(?subject), \"LVA\")" +
+                "}";
 
-        return list;
+        return performQueryAndExtractFilterPredicates(queryString);
     }
 
     @Override
     public List<String> getSuchfilterForProfessoren() {
-        List<String> list = new LinkedList<>();
-        list.add("hasTitel");
-        list.add("hasPaper");
-        list.add("hasLva");
+        String queryString = "SELECT DISTINCT ?predicate " +
+                "WHERE { ?subject ?predicate ?object." +
+                " FILTER regex(str(?subject), \"Prof\")" +
+                "}";
 
-        return list;
+        return performQueryAndExtractFilterPredicates(queryString);
     }
 
     @Override
     public List<String> getSuchfilterForPapers() {
-        List<String> list = new LinkedList<>();
-        list.add("hasAutor");
-        list.add("isUsedForLVA");
-        list.add("isSimilarTo");
+        String queryString = "SELECT DISTINCT ?predicate " +
+                "WHERE { ?subject ?predicate ?object." +
+                " FILTER regex(str(?subject), \"Paper\")" +
+                "}";
 
-        return list;
+        return performQueryAndExtractFilterPredicates(queryString);
+    }
+
+    /**
+     * Performs the given SPARQL Query towards the given server URL and returns a distinct list of all filter predicates
+     *
+     * @param queryString the Sparql-Query
+     * @return a list of all filter predicates
+     */
+    private List<String> performQueryAndExtractFilterPredicates(String queryString) {
+        System.out.println("Start search for " + queryString);
+
+        String strippedPredicate;
+        LinkedList<String> filters = new LinkedList<>();
+
+        for (String server : ServerList.getInstance().getServers()) {
+            System.out.println("executing query against server " + server);
+            QueryExecution queryExecution = QueryExecutionFactory.sparqlService(server, queryString);
+            ResultSet resultSet = queryExecution.execSelect();
+
+            while (resultSet.hasNext()) {
+                QuerySolution qs = resultSet.next();
+                RDFNode x = qs.get("predicate");
+                Resource r = x.asResource();
+                strippedPredicate = SparqlUtil.stripURI(r.getURI());
+                filters.add(strippedPredicate);
+            }
+        }
+
+        return filters.stream().distinct().collect(Collectors.toList());
+    }
+
+    private List<ErgebnisDto> performQeryAndExtractResultSet(String queryString) {
+        LinkedList<ErgebnisDto> searchResults = new LinkedList<>();
+        String subject, predicate, object;
+
+        for (String server : ServerList.getInstance().getServers()) {
+            QueryExecution queryExecution = QueryExecutionFactory.sparqlService(server, queryString);
+            ResultSet resultSet = queryExecution.execSelect();
+
+            while (resultSet.hasNext()) {
+                QuerySolution qs = resultSet.next();
+
+                subject = SparqlUtil.extractInfoFromNode(qs.get("subject"));
+                predicate = SparqlUtil.extractInfoFromNode(qs.get("predicate"));
+                object = SparqlUtil.extractInfoFromNode(qs.get("object"));
+
+                searchResults.add(new ErgebnisDto(subject, predicate, object));
+            }
+        }
+
+        return searchResults.stream().distinct().collect(Collectors.toList());
     }
 }
